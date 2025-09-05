@@ -87,7 +87,7 @@ export const WalletConnectModal: React.FC<WalletConnectModalProps> = ({ open, on
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md glass backdrop-blur-glass border-glass-border">
+      <DialogContent className="sm:max-w-md glass backdrop-blur-glass border-glass-border max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-center">
             {t('connect_wallet')}
