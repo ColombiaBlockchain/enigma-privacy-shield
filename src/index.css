@@ -1,96 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Enigma by AvalPay Design System - Privacy-First DApp UI */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
+    /* Core brand colors */
+    --bg: 218 32% 10%;
+    --text: 210 20% 96%;
+    --muted: 220 10% 60%;
+    
+    /* Glass morphism */
+    --card: 0 0% 100% / 0.08;
+    --glass: 0 0% 100% / 0.12;
+    --glass-border: 0 0% 100% / 0.16;
+    
+    /* Primary palette */
+    --primary: 172 66% 47%;
+    --primary-hover: 172 66% 55%;
+    --primary-pressed: 172 66% 40%;
     --primary-foreground: 210 40% 98%;
+    
+    /* Semantic colors */
+    --success: 158 64% 45%;
+    --warning: 38 92% 56%;
+    --danger: 0 84% 60%;
+    --info: 217 91% 60%;
+    
+    /* Grayscale */
+    --gray-50: 210 20% 98%;
+    --gray-100: 220 14% 96%;
+    --gray-200: 220 13% 91%;
+    --gray-300: 216 12% 84%;
+    --gray-400: 218 11% 65%;
+    --gray-500: 220 9% 46%;
+    --gray-600: 215 14% 34%;
+    --gray-700: 217 19% 27%;
+    --gray-800: 215 28% 17%;
+    --gray-900: 222 84% 5%;
+    
+    /* Layout tokens */
+    --radius-card: 16px;
+    --radius-button: 999px;
+    --shadow: 0 8px 24px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.3);
+    --blur: 16px;
+    
+    /* Spacing scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Component tokens */
+    --background: var(--bg);
+    --foreground: var(--text);
+    --card-bg: var(--card);
+    --card-foreground: var(--text);
+    --popover: var(--glass);
+    --popover-foreground: var(--text);
+    --secondary: 217 32% 17%;
+    --secondary-foreground: var(--text);
+    --accent: var(--primary);
+    --accent-foreground: var(--primary-foreground);
+    --destructive: var(--danger);
+    --destructive-foreground: var(--text);
+    --border: var(--glass-border);
+    --input: var(--glass);
+    --ring: var(--primary);
+    --radius: var(--radius-card);
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  [data-theme="light"] {
+    --bg: 220 20% 97%;
+    --text: 218 44% 12%;
+    --muted: 220 10% 40%;
+    --card: 0 0% 100% / 0.65;
+    --glass: 0 0% 100% / 0.7;
+    --glass-border: 0 0% 0% / 0.1;
+    --shadow: 0 8px 24px hsl(220 20% 20% / 0.15);
+    --shadow-lg: 0 20px 40px hsl(220 20% 20% / 0.2);
+  }
+}
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    backdrop-filter: blur(var(--blur));
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  /* Glassmorphism utilities */
+  .glass {
+    background: hsl(var(--glass));
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid hsl(var(--glass-border));
+  }
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+  .glass-card {
+    @apply glass rounded-[var(--radius-card)] shadow-[var(--shadow)];
+  }
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+  /* Focus ring */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
